@@ -1,6 +1,5 @@
 # Notes
 
-
 ```c
 #include <stdio.h>
 #include <cs50.h>
@@ -41,4 +40,15 @@ z = n / y; // output will be zero because int divided by int gives an int and st
 ```
 it always gives an int as an output hence storing it in a float would cause problems it is called truncation
 
+## Rounding issues:
 
+explained from 1 to 8
+
+`001`
+`010`
+`011`
+`100`
+`101`
+`110`
+`111`
+for 8 we would need `1000` if you have access to that 4th bit that is perfect but in the case you do not (similar to the situation faced in int) hence it would represent `000`
