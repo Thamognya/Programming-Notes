@@ -69,3 +69,19 @@ You can all of this compiling
 
 Use debug50 https://youtu.be/v_luodP_mfE?t=1870
 
+## Arrays
+
+```c
+int scores[3];
+// this is an array
+```
+look at [score-array](./scores/score-array.c)
+
+## Nul charecter
+
+represented as \0 . it contains 8 bits of 0
+
+H | I | ! | \0
+
+so a word like HI!, does not use 3 bytes but 4 bytes (the extra due to the nul charecter)
+
