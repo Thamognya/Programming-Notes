@@ -85,3 +85,59 @@ H | I | ! | \0
 
 so a word like HI!, does not use 3 bytes but 4 bytes (the extra due to the nul charecter)
 
+
+# 0 and etc.
+
+for example
+
+```c
+if (islower(s[i]))
+        {
+            s[i] = s[i] - 32;
+            printf("%c", s[i]);
+        }
+        else
+        {
+            printf("%c", s[i]);
+        }
+```
+
+islower(s[i]) returns 0 if it is not lower case and anyother value if upper case
+
+common convention
+
+0 == false
+anyother == true
+
+so in this case you can use if(islower(s[i]) != 0)  or just if (islower(s[i])) which both mean any other value from 0 is true
+
+
+# Command line arguments with c
+
+```c
+#include <stdio.h>
+
+int main(void)
+{
+    ...
+}
+```
+this is what we have been using thus far
+
+now we can take command line arguments like 
+
+Hello jeff and print out bye jeff
+
+```c
+#include <stdio.h>
+
+int main(int argc, string argv[])
+{
+    ...
+}
+```
+
+argc = argument count is an integer that stores how many words a human typed at prompt
+
+string argv[] = stands for argument vector; it is going to be an array of all the words that the human typed at the prompt
+
