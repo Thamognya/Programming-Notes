@@ -114,4 +114,209 @@ for i in n - 1:
         search left half
 return false
 
+# Data structures (no not that)
+
+make our own data types just like you can in scratch
+
+// phone book problem
+we want an array of persons (which contain numbers and names) how so?
+a brand new data type
+
+```c
+typdef struct
+{
+    string name;
+    string number;
+}
+person;
+```
+
+typdef is the c keyword to create your own data type
+
+struct is a realted keyword to tell that it isnt a simple data type like int or flot but that it has structure like 2 or more things in it
+
+person is the name of the data type
+
+
+2nd approach to seach for smallest numer
+start left to right
+
+# Selection Sort Demonstartion
+
+go through the list using for loop to find smallest number
+
+5 2 7 4 1 6 3 0
+
+since 0 is in first place, lest swap 0 and 5
+
+0 | 2 7 4 1 6 3 5
+
+now forgetting 0 (since it is already solved)
+
+0 1 7 4 2 6 3 5
+
+and so on till you get
+
+0 1 2 3 4 5 6 7
+
+1:22
+
+# Bubble Sort Demonstration
+
+Solve simple problems = (i.e the 2 closest and put them in order forgetting if it is the current position or not just sort it so that you can get the the higher number on the left hand side)
+
+after the first round shown below 7 or the biggest number is solved
+
+5 2 7 4 1 6 3 0
+
+5 2 7 4 1 6 3 0
+^ ^
+2 5 7 4 1 6 3 0
+  ^ ^
+2 5 7 4 1 6 3 0
+    ^ ^
+2 5 4 7 1 6 3 0
+      ^ ^
+2 5 4 1 7 6 3 0
+        ^ ^
+2 5 4 1 6 7 3 0
+          ^ ^
+2 5 4 1 6 3 7 0
+            ^ ^
+2 5 4 1 6 3 0 7
+
+
+now keep the 7 out as it is already sorted and do this again
+
+2 5 4 1 6 3 0 | 7
+^ ^
+2 5 4 1 6 3 0 | 7
+  ^ ^
+2 4 5 1 6 3 0 | 7
+    ^ ^
+2 4 1 5 6 3 0 | 7
+      ^ ^
+2 4 1 5 6 3 0 | 7
+        ^ ^
+2 4 1 5 3 6 0 | 7
+          ^ ^
+2 4 1 5 3 0 6 | 7
+
+I am lazy to write in the rest but you can see what happens
+
+
+# Selection sort
+
+represented by the following psuedo code
+
+For i from 0 to n–1
+    Find smallest number between numbers[i] and numbers[n-1]
+    Swap smallest number with numbers[i]
+    // i at the first loop is 0 (the smallest / first place) so replacing the smallest number is just saying to move it back to the first place, then move on to 1 to n-1 (i.e forget about the first place or in this case the smallest)
+
+Time Complexity: O()
+
+n + n-1 + n-2 .... + 1
+
+n(n + 1)/2
+
+n^2/2 + n/2 // real
+
+since big numbers n^2 // general
+
+so time complexity (upper bound) = O(n^2)
+
+Time complexity (Lower Bound) = Omega(n^2)
+// still goes through the numbers the same number of times as
+// n + n-1 + n-2 .... + 1
+
+Theta(n^2)
+
+# Bubble Sort
+
+psuedo code
+
+Repeat n-1 times // for the last number you have to move from the last positon to the first place (worst case) and hence have to repeat n-1 times
+    For i from 0 to n–2 // you want to compare the last 2 digits of the arrays hence n-2
+        If numbers[i] and numbers[i+1] out of order
+            Swap them
+    If no swaps
+        quit
+
+
+Time Complexity (upper bound): O((n-1)^2) => O(n^2)
+
+TIme Complexity (lower bound): Omega(n-1) => Omega(n)
+
+Both the selection sort and bubble sort are inefficent
+
+These are comparison sort
+
+we shall use recursion
+
+binary search psuedo code with recursion
+
+1  Pick up phone book
+2  Open to middle of phone book
+3  Look at page
+4  If person is on page
+5      Call person
+6  Else if person is earlier in book
+7      Search left half of book
+8  Else if person is later in book
+9     Search right half of book
+10 Else
+11     Quit
+
+
+search is bad fucntion in psuedo code as it is recursion which we had not learnt about
+
+
+# Merge Sort
+
+Psuedo code:
+
+If only one number
+  Quit
+Else
+    Sort left half of number
+    Sort right half of number
+    Merge sorted halves
+
+
+sort means calling itself i.e recursion
+
+For any recursion there must be a base case to prvent infinte loops and etc.
+
+
+Merge sorted halves  meaning
+
+take 2 cases
+
+2 4 5 7  0 1 3 6
+both halves are sorted
+
+close down the other numbers apart from the first number from each list
+
+2 0
+
+since 0 is smaller it gets in its own place and then open the next number from the half where 0 was present
+
+0 
+
+2   1
+
+again 1 is smaller so
+
+0 1 
+
+2   3
+
+2 is smaller so 
+
+0 1 2
+
+4    3 
+
+and so on
 
