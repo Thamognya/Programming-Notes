@@ -320,3 +320,15 @@ again 1 is smaller so
 
 and so on
 
+Requires an extra array/ more space but a huge time efficency
+
+O(n log(n))
+
+omega(n log(n))
+
+theta(n log(n))
+
+if data is somewhat more sorted bubble sort is better 
+
+
+but mostly merge sort is better
