@@ -14,3 +14,21 @@ Find the video here: [https://youtu.be/Ej_Pcr4uC2Q](https://youtu.be/Ej_Pcr4uC2Q
 ⌨️ (1:13:49) Class
 ⌨️ (1:37:41) Exception Handling
 ⌨️ (1:41:26) Conclusion
+
+# Notes
+
+the .exe file compiled from executing is executable with linux
+
+strongly typed language:
+- c, c++, java, typescript
+
+dynamic typed language:
+- python, ruby, js
+
+funademntal types are:
+- int
+- double
+- string
+- bool
+- dynamic
+
