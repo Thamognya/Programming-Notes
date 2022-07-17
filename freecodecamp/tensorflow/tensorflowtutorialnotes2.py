@@ -99,8 +99,8 @@ dftrain.head()
 
 dfeval.head()
 
-ytrain = dftrain.pop('survived') # removed and stored survided in ytain 
-yeval = dfeval.pop('survived') # removed and stroed survived in yeval
+y_train = dftrain.pop('survived') # removed and stored survided in ytain 
+y_eval = dfeval.pop('survived') # removed and stroed survived in yeval
 
 dftrain.head()
 
@@ -116,3 +116,73 @@ dftrain.shape
 
 dftrain.age.hist(bins=20)
 
+dftrain.sex.value_counts().plot(kind='barh')
+
+pd.concat([dftrain, y_train], axis=1).groupby('sex').survived.mean().plot(kind='barh').set_xlabel('% survive')
+
+CATEGORICAL_COLUMNS = ['sex', 'n_siblings_spouses', 'parch', 'class', 'deck',
+                       'embark_town', 'alone']
+NUMERIC_COLUMNS = ['age', 'fare']
+
+feature_columns = []
+for feature_name in CATEGORICAL_COLUMNS:
+  vocabulary = dftrain[feature_name].unique()  # gets a list of all unique values from given feature column
+  feature_columns.append(tf.feature_column.categorical_column_with_vocabulary_list(feature_name, vocabulary))
+
+for feature_name in NUMERIC_COLUMNS:
+  feature_columns.append(tf.feature_column.numeric_column(feature_name, dtype=tf.float32))
+
+print(feature_columns)
+
+"""#### Training process
+
+epochs baasically spliting up the data and batches to allow the model to train on. 
+"""
+
+def make_input_fn(data_df, label_df, num_epochs=200, shuffle=True, batch_size=128):
+  def input_function():  # inner function, this will be returned
+    ds = tf.data.Dataset.from_tensor_slices((dict(data_df), label_df))  # create tf.data.Dataset object with data and its label
+    if shuffle:
+      ds = ds.shuffle(1000)  # randomize order of data
+    ds = ds.batch(batch_size).repeat(num_epochs)  # split dataset into batches of 32 and repeat process for number of epochs
+    return ds  # return a batch of the dataset
+  return input_function  # return a function object for use
+
+train_input_fn = make_input_fn(dftrain, y_train)  # here we will call the input_function that was returned to us to get a dataset object we can feed to the model
+eval_input_fn = make_input_fn(dfeval, y_eval, num_epochs=1, shuffle=False)
+
+linear_est = tf.estimator.LinearClassifier(feature_columns=feature_columns)
+
+with tfd.scope():
+  linear_est.train(train_input_fn)
+  result = linear_est.evaluate(eval_input_fn)
+
+print(result['accuracy'])  # the result variable is simply a dict of stats about our model
+
+print(result)
+
+# not great at predicting one output but larger batches of data
+# lets make preddiction for every single point of dataset
+with tfd.scope():
+  result = list(linear_est.predict(eval_input_fn))
+print(result)
+
+print(result[0]) #prediction for one
+
+def person_stat_death(n):
+  print("----------")
+  print("Estimated: ")
+  print("------")
+  print(dfeval.loc[n])
+  print(result[n]['probabilities'][1])
+  print("-------")
+  print("Actual: ")
+  print("-------")
+  print(y_eval.loc[n])
+  print("----------")
+
+person_stat_death(2)
+person_stat_death(3)
+person_stat_death(4)
+
+"""## Classification """
